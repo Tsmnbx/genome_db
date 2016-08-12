@@ -1,2 +1,5 @@
 # contains all bacteria's names that does not have anything in its
 # "latest assembly versions" folder
+blah 
+blah 
+blah 

@@ -101,26 +101,31 @@ def check(): # checks which bacteria we can skip
     count = 0
     for name in names:
       ftp_host.chdir(name+"/latest_assembly_versions")
+      print(name)
 
       amt = len(ftp_host.listdir(ftp_host.curdir))
 
       if amt == 0: # no latest_assembly_versions 
 	skipBac.write(name + "\n")
+      else:
+	skipBac.write('blah \n')
 
       ftp_host.chdir("../..")  # go back to list
       
-      if count > 10:
+      count += 1
+      if count >= 3:
 	break
 # '''
-
+'''
 if (len(sys.argv) < 4):
     print("USAGE: python ftp_download.py species_start_id file_start_id bacteria_name_starts_with [bacteria_only_start_at]")
     exit()
 
+
 start_bacteria = sys.argv[1]
 stop_bacteria = sys.argv[2]
 species_count = int(sys.argv[3])
-file_count = int(sys.argv[4])
+file_count = int(sys.argv[4]) # '''
 
 
 # create_summary()
