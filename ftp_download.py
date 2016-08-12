@@ -2,6 +2,7 @@ import ftputil
 from subprocess import call
 import sys
 import os
+import datetime
 
 '''
 USAGE: python ftp_download.py start_bacteria stop_bacteria
@@ -25,39 +26,51 @@ def bacteria_check(bacteria_list, bacteria):
         exit()
 
 # Functions for creating summary, and species and accession list
+# def create_summary():
+#     path = os.path.normpath(os.path.join(os.getcwd(), "summary"))
+#     if os.path.exists(path.strip()):
+#         print("appending to existing summary file...")
+#     else:
+#         summary = open("summary",'w')
+#         summary.write("species_key" + "\t" + "bacteria_name" + "\t" + "accession_key" + "\t" + "accession_name\n")
+
 def create_summary():
     path = os.path.normpath(os.path.join(os.getcwd(), "summary"))
     if os.path.exists(path.strip()):
-        print("appending to existing summary file...")
+        print("Summary file found. New reports will be published on it...")
     else:
         summary = open("summary",'w')
-        summary.write("species_id" + "\t" + "bacteria_name" + "\t" + "accession_key" + "\t" + "accession_name\n")
+        close (summary)
 
 def create_species_list():
     path = os.path.normpath(os.path.join(os.getcwd(), "species_list"))
     if os.path.exists(path.strip()):
         print("appending to existing species list...")
     else:
-        summary = open("species_list",'w')
-        summary.write("species_id" + "\t" + "bacteria_name")
+        species_file = open("species_list",'w')
+        update_species_list (species_file, "species_key", "bacteria_name")
+        close (species_file)
 
 def create_accession_list():
     path = os.path.normpath(os.path.join(os.getcwd(), "accession_list"))
     if os.path.exists(path.strip()):
         print("appending to existing summary file...")
     else:
-        summary = open("accession_list",'w')
-        summary.write("accession_key" + "\t" + "accession_name" + "\t" + "species_id\n")
+        accession_file = open("accession_list",'w')
+        update_accession_list (accession_file, "accession_key", "accession_name", "species_key")
+        close(accession_file)ta
 
-def update_summary():
+def update_species_list(file, species_key, bacteria_name):
+    file.write(species_key + "\t" + bacteria_name + "\n")
 
-def update_species_list():
-
-def update_accession_list():
+def update_accession_list(file, accession_key, accession_name, species_key):
+    file.write(accession_key + "\t" + accession_name + "\t" + species_key + "\n)
 
 def download():
 
+
 def ftp_access():
+    # opening all the files that will be edited
     summary = open("summary", 'a')
     species_file = open("species_list", 'a')
     accession_file = open("accession_list", 'a')
