@@ -32,26 +32,26 @@ def create_summary():
     if os.path.exists(path.strip()):
         print("Summary file found. New reports will be published on it...")
     else:
+        print("creating new summary...")
         summary = open("summary",'w')
-        summary.close()
 
 def create_species_list():
     path = os.path.normpath(os.path.join(os.getcwd(), "species_list"))
     if os.path.exists(path.strip()):
         print("appending to existing species list...")
     else:
+        print("creating new species list...")
         species_file = open("species_list",'w')
-        update_species_list (species_file, "species_key", "bacteria_name")
-        species_file.close()
+        update_species_list (species_file, "species_key", "species_name")
 
 def create_accession_list():
     path = os.path.normpath(os.path.join(os.getcwd(), "accession_list"))
     if os.path.exists(path.strip()):
-        print("appending to existing summary file...")
+        print("appending to existing accession file...")
     else:
+        print("creating new accession file...")
         accession_file = open("accession_list",'w')
         update_accession_list (accession_file, "accession_key", "accession_name", "species_key")
-        accession_file.close()
 
 def update_species_list(file, species_key, bacteria_name):
     file.write(str(species_key) + "\t" + bacteria_name + "\n")
@@ -80,10 +80,16 @@ def download(bacteria_key, accession_key):
         for i in range(bacteria_start_id, bacteria_stop_id+1):
             print (bacteria_list[i])
 
+        # updating summary
+        summary.write (str(datetime.datetime.now()) + "\n")
+        summary.write ("Downloaded: from " + start_bacteria + " to " + stop_bacteria + "\n")
+        summary.write ("bacteria_key [start]: " + str(bacteria_key) + "\n")
+        summary.write ("accession_key [start]" + str(accession_key) + "\n")
 
         for i in range(bacteria_start_id, bacteria_stop_id+1):
             #loop through the bacteria being downloaded
             bacteria_name = bacteria_list[i]
+            update_species_list(species_file, bacteria_key, bacteria_name)
 
             print ("\nSPECIES#" + str(bacteria_key) + ": "+ bacteria_name)
             ftp_host.chdir(bacteria_name)
@@ -95,7 +101,6 @@ def download(bacteria_key, accession_key):
 
             ftp_host.chdir("latest_assembly_versions")
             assembly_list = ftp_host.listdir(ftp_host.curdir)
-            print(assembly_list)
 
             for assembly in assembly_list:
                 # accessing every assembly folder in the species folder
@@ -104,8 +109,6 @@ def download(bacteria_key, accession_key):
                 files = ftp_host.listdir(ftp_host.curdir)
                 for file in files:
                     if "_genomic.gbff.gz" in file:
-                        summary.write(str(bacteria_key) + "\t" + bacteria_name + "\t" + str(accession_key) + "\t" + file.strip(".gz") + "\n")
-                        update_species_list(species_file, bacteria_key, bacteria_name)
                         update_accession_list(accession_file, accession_key, file.strip(".gz"), bacteria_key)
 
                         # stdout information about which file (strain) is being downloaded right now
@@ -126,9 +129,9 @@ def download(bacteria_key, accession_key):
             bacteria_key += 1
 
         # updating summary
-        summary.write (str(datetime.datetime.now()) + "\n")
-        summary.write ("Downloaded: from " + start_bacteria + " to " + stop_bacteria)
-        summary.write ("bacteria_key [start]: " + str(bacteria_key))
+        summary.write ("bacteria_key [stop]: " + str(bacteria_key-1) + "\n")
+        summary.write ("accession_key [stop]: " + str(accession_key-1) + "\n")
+        summary.write ("------------------------------------------------\n")
 
         print("done downloading")
 
@@ -157,19 +160,17 @@ def check():# this is used to show there're bacteria w/ +1 latest versions
     print("{}:  {}".format(amt,vers_to_amt[amt])) # amt of vers : count
 '''
 
-if (len(sys.argv) < 4):
-    print("USAGE: python ftp_download.py start_bacteria stop_bacteria species_id_start start_accession_id_start")
+if (len(sys.argv) == 5):
+    start_bacteria = sys.argv[1]
+    stop_bacteria = sys.argv[2]
+    bacteria_key = int(sys.argv[3])
+    accession_key = int(sys.argv[4])
+
+    create_summary()
+    create_species_list()
+    create_accession_list()
+    download(bacteria_key, accession_key)
+
+elif (len(sys.argv) < 5):
+    print("USAGE: python ftp_download.py  start_bacteria  stop_bacteria  species_id_start  accession_id_start")
     exit()
-
-start_bacteria = sys.argv[1]
-stop_bacteria = sys.argv[2]
-bacteria_key = int(sys.argv[3])
-accession_key = int(sys.argv[4])
-
-create_summary()
-create_species_list()
-create_accession_list()
-download(bacteria_key, accession_key)
-
-
-# Aerococcus_viridans
