@@ -15,8 +15,52 @@ TODO:
 - save the downloaded list in three files for db tables: summary, species list, file list
 '''
 
+# Checks if a bacteria is in the bacteria_list from genbank
+def bacteria_check(bacteria_list, bacteria):
+    if (bacteria in bacteria_list):
+        bacteria_id = bacteria_list.index(bacteria)
+        return bacteria_id
+    else:
+        print (bacteria + " not found in the list of bacteria")
+        exit()
+
+# Functions for creating summary, and species and accession list
+def create_summary():
+    path = os.path.normpath(os.path.join(os.getcwd(), "summary"))
+    if os.path.exists(path.strip()):
+        print("appending to existing summary file...")
+    else:
+        summary = open("summary",'w')
+        summary.write("species_id" + "\t" + "bacteria_name" + "\t" + "accession_key" + "\t" + "accession_name\n")
+
+def create_species_list():
+    path = os.path.normpath(os.path.join(os.getcwd(), "species_list"))
+    if os.path.exists(path.strip()):
+        print("appending to existing species list...")
+    else:
+        summary = open("species_list",'w')
+        summary.write("species_id" + "\t" + "bacteria_name")
+
+def create_accession_list():
+    path = os.path.normpath(os.path.join(os.getcwd(), "accession_list"))
+    if os.path.exists(path.strip()):
+        print("appending to existing summary file...")
+    else:
+        summary = open("accession_list",'w')
+        summary.write("accession_key" + "\t" + "accession_name" + "\t" + "species_id\n")
+
+def update_summary():
+
+def update_species_list():
+
+def update_accession_list():
+
 def download():
-    summary = open("summary",'a')
+
+def ftp_access():
+    summary = open("summary", 'a')
+    species_file = open("species_list", 'a')
+    accession_file = open("accession_list", 'a')
 
     startDIR = "/genomes/genbank/bacteria/"
     with ftputil.FTPHost("ftp.ncbi.nlm.nih.gov",'anonymous','') as ftp_host:
@@ -36,55 +80,53 @@ def download():
 
         for i in range(bacteria_start_id, bacteria_stop_id+1):
             #loop through the bacteria being downloaded
+            bacteria_id = i;
             bacteria_name = bacteria_list[i]
 
             print ("\nSPECIES#" + str(i+1) + ": "+ bacteria_name)
-            # ftp_host.chdir(bacteria_name+"/latest_assembly_versions")
             ftp_host.chdir(bacteria_name)
 
             if ("latest_assembly_versions" not in ftp_host.listdir(ftp_host.curdir)):
                 print ("bacteria does not have a latest_assembly_versions folder: " + bacteria_name)
+                # writing null in summary for this species id
+                summary.write(str(bacteria_id) + "\t" + bacteria_name + "\t" + str(file_count) + "\t" + file.strip(".gz") + "\n")
+                species_file(str(bacteria_id) + "\t" + bacteria_name)
                 ftp_host.chdir("../")
                 continue
 
             assembly_list = ftp_host.listdir(ftp_host.curdir)
-            ftp_host.chdir("../")
+            print (assembly_list)
 
             for assembly in assembly_list:
+                print (assembly)
+                print (ftp_host.getcwd())
+                # accessing every assembly folder in the species folder
                 ftp_host.chdir(assembly)
 
                 files = ftp_host.listdir(ftp_host.curdir)
                 for file in files:
+                    dowload()
                     if "_genomic.gbff.gz" in file:
-                        # downloaded to current director in terminal
-                        summary.write(str(file_count) + "\t" + str(species_count) + "\t" + bacteria_name + "\t" + file.strip(".gz") + "\n")
+                        summary.write(str(bacteria_id) + "\t" + bacteria_name + "\t" + str(file_count) + "\t" + file.strip(".gz") + "\n")
+                        species_file(str(bacteria_id) + "\t" + bacteria_name)
+                        accession_file.write(str(file_count) + "\t" + file.strip(".gz") + "\t" + str(bacteria_id))
+
+                        # stdout information about which file (strain) is being downloaded right now
                         print ("file#" + str(file_count) + ": " + file)
                         ftp_host.download(file,file)
+
+                        # unzipping the file that is downloaded
                         print ("Unzipping")
                         call(["gzip","-d",file])
                         file_count+=1
 
+                # moving back to the folder with all the assemblies
                 ftp_host.chdir("../")
 
+            # moving back to startDIR because all the assembly folders are symlinks
             ftp_host.chdir(startDIR)
-            species_count+=1
+
         print("done downloading")
-
-def bacteria_check(bacteria_list, bacteria):
-    if (bacteria in bacteria_list):
-        bacteria_id = bacteria_list.index(bacteria)
-        return bacteria_start_id
-    else:
-        print (bacteria + " not found in the list of bacteria")
-        exit()
-
-def create_summary():
-    path = os.path.normpath(os.path.join(os.getcwd(), "summary"))
-    if os.path.exists(path.strip()):
-        print("appending to existing summary file...")
-    else:
-        summary = open("summary",'w')
-        summary.write("accession_key" + "\t" +  "species_id" + "\t" + "bacteria_name" + "\t" + "assembly_name" + "\n")
 
 '''
 def check():# this is used to show there're bacteria w/ +1 latest versions
@@ -112,13 +154,14 @@ def check():# this is used to show there're bacteria w/ +1 latest versions
 '''
 
 if (len(sys.argv) < 4):
-    print("USAGE: python ftp_download.py species_start_id file_start_id bacteria_name_starts_with [bacteria_only_start_at]")
+    print("USAGE: python ftp_download.py start_bacteria stop_bacteria species_id_start start_accession_id_start")
     exit()
 
 start_bacteria = sys.argv[1]
 stop_bacteria = sys.argv[2]
-species_count = int(sys.argv[3])
-file_count = int(sys.argv[4])
+file_count = int(sys.argv[3])
 
-# create_summary()
-download()
+create_summary()
+create_species_list()
+create_accession_list()
+ftp_access()
