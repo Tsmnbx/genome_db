@@ -92,35 +92,39 @@ def create_summary():
 
 
 def check(): # checks which bacteria we can skip
+  
   skipBac = open('skipBacteria.txt','a')
   startDIR = "./genomes/genbank/bacteria/"
   with ftputil.FTPHost("ftp.ncbi.nlm.nih.gov",'anonymous','') as ftp_host:
     ftp_host.chdir(startDIR)
     names = ftp_host.listdir(ftp_host.curdir)
-
-    count = 0
-    for name in names:
-      ftp_host.chdir(name+"/latest_assembly_versions")
-      print(name)
-
-      amt = len(ftp_host.listdir(ftp_host.curdir))
-
-      if amt == 0: # no latest_assembly_versions 
-	skipBac.write(name + "\n")
-      else:
-	skipBac.write('blah \n')
-
-      ftp_host.chdir("../..")  # go back to list
+    
+    start = int(start_bacteria)
+    count = start
+    check_list = names[start:(start + 500) + 1 ]
+    
+   
+    for name in check_list:
+      ftp_host.chdir(name)
+      if "latest_assembly_versions" not in ftp_host.listdir(ftp_host.curdir):
+	#mark down bacteria w/o latest_assembly_versions 
+	skipBac.write(str(count) + ')' + name + "\n")
+	
+	if count%50 == 0: 
+	  print('.') # 1 dot / 50 bacteria
+	  skipBac.write(str(count) + ')\n') # helps keep track
+	  
       
+      ftp_host.chdir("..")  # go back to list
+
       count += 1
-      if count >= 3:
-	break
-# '''
+    print('Checked upto (but excluding): ', count) # '''
+      
 '''
 if (len(sys.argv) < 4):
     print("USAGE: python ftp_download.py species_start_id file_start_id bacteria_name_starts_with [bacteria_only_start_at]")
     exit()
-
+'''
 
 start_bacteria = sys.argv[1]
 stop_bacteria = sys.argv[2]
