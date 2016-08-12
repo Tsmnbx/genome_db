@@ -99,22 +99,26 @@ def check(): # checks which bacteria we can skip
     ftp_host.chdir(startDIR)
     names = ftp_host.listdir(ftp_host.curdir)
     
-    start = int(start_bacteria)
-    count = start
-    check_list = names[start:(start + 500) + 1 ]
     
-   
-    for name in check_list:
+    start = int(start_bacteria)
+    if stop_bacteria == '-1':	# this part prints the name of bacteria
+      print(names[start])      	# given the bacteria's "id" 
+      return 'nothing'		# and skips the rest of the program
+    
+    count = start
+    # check_list = names[start:(start + 100) ]
+    
+    print('start going through the list...')
+    for name in names:
       ftp_host.chdir(name)
+      
       if "latest_assembly_versions" not in ftp_host.listdir(ftp_host.curdir):
 	#mark down bacteria w/o latest_assembly_versions 
-	skipBac.write(str(count) + ')' + name + "\n")
-	
-	if count%50 == 0: 
-	  print('.') # 1 dot / 50 bacteria
-	  skipBac.write(str(count) + ')\n') # helps keep track
-	  
-      
+	print(str(count) + ')' + name + "\n")
+
+      else:
+	print(count)
+
       ftp_host.chdir("..")  # go back to list
 
       count += 1

@@ -1,2 +1,10 @@
 # contains all bacteria's names that does not have anything in its
 # "latest assembly versions" folder. 13268 bacteria in total
+0)
+0)
+100)
+200)
+300)
+400)
+500)
+548)Aeromicrobium_sp._REDSEA-S29_B11600)
