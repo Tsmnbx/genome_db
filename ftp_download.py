@@ -26,13 +26,6 @@ def bacteria_check(bacteria_list, bacteria):
         exit()
 
 # Functions for creating summary, and species and accession list
-# def create_summary():
-#     path = os.path.normpath(os.path.join(os.getcwd(), "summary"))
-#     if os.path.exists(path.strip()):
-#         print("appending to existing summary file...")
-#     else:
-#         summary = open("summary",'w')
-#         summary.write("species_key" + "\t" + "bacteria_name" + "\t" + "accession_key" + "\t" + "accession_name\n")
 
 def create_summary():
     path = os.path.normpath(os.path.join(os.getcwd(), "summary"))
@@ -40,7 +33,7 @@ def create_summary():
         print("Summary file found. New reports will be published on it...")
     else:
         summary = open("summary",'w')
-        close (summary)
+        summary.close()
 
 def create_species_list():
     path = os.path.normpath(os.path.join(os.getcwd(), "species_list"))
@@ -49,7 +42,7 @@ def create_species_list():
     else:
         species_file = open("species_list",'w')
         update_species_list (species_file, "species_key", "bacteria_name")
-        close (species_file)
+        species_file.close()
 
 def create_accession_list():
     path = os.path.normpath(os.path.join(os.getcwd(), "accession_list"))
@@ -58,18 +51,15 @@ def create_accession_list():
     else:
         accession_file = open("accession_list",'w')
         update_accession_list (accession_file, "accession_key", "accession_name", "species_key")
-        close(accession_file)ta
+        accession_file.close()
 
 def update_species_list(file, species_key, bacteria_name):
-    file.write(species_key + "\t" + bacteria_name + "\n")
+    file.write(str(species_key) + "\t" + bacteria_name + "\n")
 
 def update_accession_list(file, accession_key, accession_name, species_key):
-    file.write(accession_key + "\t" + accession_name + "\t" + species_key + "\n)
+    file.write(str(accession_key) + "\t" + accession_name + "\t" + str(species_key) + "\n")
 
-def download():
-
-
-def ftp_access():
+def download(bacteria_key, accession_key):
     # opening all the files that will be edited
     summary = open("summary", 'a')
     species_file = open("species_list", 'a')
@@ -88,56 +78,57 @@ def ftp_access():
         # letting the user know which bacteria are being downloading
         print("Downloading the following bacteria...")
         for i in range(bacteria_start_id, bacteria_stop_id+1):
-            print (str(i+1) + "\t" + bacteria_list[i])
-        print ("total number of bacteria being downloaded: " + str(len(range(bacteria_start_id, bacteria_stop_id+1))))
+            print (bacteria_list[i])
+
 
         for i in range(bacteria_start_id, bacteria_stop_id+1):
             #loop through the bacteria being downloaded
-            bacteria_id = i;
             bacteria_name = bacteria_list[i]
 
-            print ("\nSPECIES#" + str(i+1) + ": "+ bacteria_name)
+            print ("\nSPECIES#" + str(bacteria_key) + ": "+ bacteria_name)
             ftp_host.chdir(bacteria_name)
 
             if ("latest_assembly_versions" not in ftp_host.listdir(ftp_host.curdir)):
                 print ("bacteria does not have a latest_assembly_versions folder: " + bacteria_name)
-                # writing null in summary for this species id
-                summary.write(str(bacteria_id) + "\t" + bacteria_name + "\t" + str(file_count) + "\t" + file.strip(".gz") + "\n")
-                species_file(str(bacteria_id) + "\t" + bacteria_name)
                 ftp_host.chdir("../")
-                continue
+                break
 
+            ftp_host.chdir("latest_assembly_versions")
             assembly_list = ftp_host.listdir(ftp_host.curdir)
-            print (assembly_list)
+            print(assembly_list)
 
             for assembly in assembly_list:
-                print (assembly)
-                print (ftp_host.getcwd())
                 # accessing every assembly folder in the species folder
                 ftp_host.chdir(assembly)
 
                 files = ftp_host.listdir(ftp_host.curdir)
                 for file in files:
-                    dowload()
                     if "_genomic.gbff.gz" in file:
-                        summary.write(str(bacteria_id) + "\t" + bacteria_name + "\t" + str(file_count) + "\t" + file.strip(".gz") + "\n")
-                        species_file(str(bacteria_id) + "\t" + bacteria_name)
-                        accession_file.write(str(file_count) + "\t" + file.strip(".gz") + "\t" + str(bacteria_id))
+                        summary.write(str(bacteria_key) + "\t" + bacteria_name + "\t" + str(accession_key) + "\t" + file.strip(".gz") + "\n")
+                        update_species_list(species_file, bacteria_key, bacteria_name)
+                        update_accession_list(accession_file, accession_key, file.strip(".gz"), bacteria_key)
 
                         # stdout information about which file (strain) is being downloaded right now
-                        print ("file#" + str(file_count) + ": " + file)
+                        print ("file#" + str(accession_key) + ": " + file)
+                        # downloading the file
                         ftp_host.download(file,file)
 
                         # unzipping the file that is downloaded
                         print ("Unzipping")
                         call(["gzip","-d",file])
-                        file_count+=1
+                        accession_key+=1
 
                 # moving back to the folder with all the assemblies
                 ftp_host.chdir("../")
 
             # moving back to startDIR because all the assembly folders are symlinks
             ftp_host.chdir(startDIR)
+            bacteria_key += 1
+
+        # updating summary
+        summary.write (str(datetime.datetime.now()) + "\n")
+        summary.write ("Downloaded: from " + start_bacteria + " to " + stop_bacteria)
+        summary.write ("bacteria_key [start]: " + str(bacteria_key))
 
         print("done downloading")
 
@@ -172,9 +163,13 @@ if (len(sys.argv) < 4):
 
 start_bacteria = sys.argv[1]
 stop_bacteria = sys.argv[2]
-file_count = int(sys.argv[3])
+bacteria_key = int(sys.argv[3])
+accession_key = int(sys.argv[4])
 
 create_summary()
 create_species_list()
 create_accession_list()
-ftp_access()
+download(bacteria_key, accession_key)
+
+
+# Aerococcus_viridans
