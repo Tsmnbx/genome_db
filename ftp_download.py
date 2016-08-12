@@ -90,30 +90,28 @@ def create_summary():
         summary = open("summary",'w')
         summary.write("accession_key" + "\t" +  "species_id" + "\t" + "bacteria_name" + "\t" + "assembly_name" + "\n")
 
-'''
-def check():# this is used to show there're bacteria w/ +1 latest versions
-  vers_to_amt = {}
+
+def check(): # checks which bacteria we can skip
+  skipBac = open('skipBacteria.txt','a')
   startDIR = "./genomes/genbank/bacteria/"
   with ftputil.FTPHost("ftp.ncbi.nlm.nih.gov",'anonymous','') as ftp_host:
     ftp_host.chdir(startDIR)
     names = ftp_host.listdir(ftp_host.curdir)
 
+    count = 0
     for name in names:
-    ftp_host.chdir(name+"/latest_assembly_versions")
+      ftp_host.chdir(name+"/latest_assembly_versions")
 
-    names = ftp_host.listdir(ftp_host.curdir)
+      amt = len(ftp_host.listdir(ftp_host.curdir))
 
-    amt = len(names)
-    if amt in vers_to_amt:
-      vers_to_amt[amt] += 1
-    else:
-      vers_to_amt[amt] = 1
+      if amt == 0: # no latest_assembly_versions 
+	skipBac.write(name + "\n")
 
-    ftp_host.chdir("../..")  # go back to list
-
-  for amt in vers_to_amt.keys():
-    print("{}:  {}".format(amt,vers_to_amt[amt])) # amt of vers : count
-'''
+      ftp_host.chdir("../..")  # go back to list
+      
+      if count > 10:
+	break
+# '''
 
 if (len(sys.argv) < 4):
     print("USAGE: python ftp_download.py species_start_id file_start_id bacteria_name_starts_with [bacteria_only_start_at]")
@@ -126,4 +124,5 @@ file_count = int(sys.argv[4])
 
 
 # create_summary()
-download()
+# download()
+check()
