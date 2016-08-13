@@ -53,6 +53,15 @@ def create_accession_list():
         accession_file = open("accession_list",'w')
         update_accession_list (accession_file, "accession_key", "accession_name", "species_key")
 
+def create_no_accession_list():
+    path = os.path.normpath(os.path.join(os.getcwd(), "no_accession_list"))
+    if os.path.exists(path.strip()):
+        print("appending to existing no accession list file...")
+    else:
+        print("creating new no accession list file...")
+        no_accession_file = open("no_accession_list",'w')
+        no_accession_file.write("species_name")
+
 def update_species_list(file, species_key, bacteria_name):
     file.write(str(species_key) + "\t" + bacteria_name + "\n")
 
@@ -64,8 +73,10 @@ def download(bacteria_key, accession_key):
     summary = open("summary", 'a')
     species_file = open("species_list", 'a')
     accession_file = open("accession_list", 'a')
+    no_accession_file = open("no_accession_list", 'a')
 
     startDIR = "/genomes/genbank/bacteria/"
+
     with ftputil.FTPHost("ftp.ncbi.nlm.nih.gov",'anonymous','') as ftp_host:
         ftp_host.chdir(startDIR)
         bacteria_list = ftp_host.listdir(ftp_host.curdir)
@@ -96,6 +107,7 @@ def download(bacteria_key, accession_key):
 
             if ("latest_assembly_versions" not in ftp_host.listdir(ftp_host.curdir)):
                 print ("bacteria does not have a latest_assembly_versions folder: " + bacteria_name)
+                no_accession_file.write(bacteria_name + "\n")
                 ftp_host.chdir("../")
                 break
 
