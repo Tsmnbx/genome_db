@@ -10,7 +10,7 @@ start_id for species: check the last item in the summary
 
 TODO:
 - skip bacteria that doesnt have latest_assembly_versions folder DONE
-- save the skipped bacteria list in a file
+- save the skipped bacteria list in a file	DONE
 - skip bacteria that is already in the folder (or prompt if the user wants to download again)
 - save the downloaded list in three files for db tables: summary, species list, file list
 '''

@@ -1,17 +1,9 @@
 # contains all bacteria's names that does not have anything in its
 # "latest assembly versions" folder. 13268 bacteria in total
-0)
-100)
-200)
-300)
-400)
-500)
-548)Aeromicrobium_sp._REDSEA-S29_B11
-600)
-
-586) Aeromonas_sp._EERV15
-757) Alishewanella_sp._HH-ZS
-825) Altererythrobacter_sp._XY-R17
+548)  Aeromicrobium_sp._REDSEA-S29_B11
+586)  Aeromonas_sp._EERV15
+757)  Alishewanella_sp._HH-ZS
+825)  Altererythrobacter_sp._XY-R17
 1498) Bacillus_sp._SIT16
 2047) Bradyrhizobium_sp._ORS_375
 2486) Candidatus_Arthromitus_sp._SFB-mouse
