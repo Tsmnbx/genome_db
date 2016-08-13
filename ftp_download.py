@@ -92,29 +92,33 @@ def create_summary():
 
 
 def check(): # checks which bacteria we can skip
+  print('Connecting to server...')
   
-  skipBac = open('skipBacteria.txt','a')
   startDIR = "./genomes/genbank/bacteria/"
   with ftputil.FTPHost("ftp.ncbi.nlm.nih.gov",'anonymous','') as ftp_host:
     ftp_host.chdir(startDIR)
     names = ftp_host.listdir(ftp_host.curdir)
     
+    print('Connected to server...')
     
     start = int(start_bacteria)
-    if stop_bacteria == '-1':	# this part prints the name of bacteria
+    end   = int(stop_bacteria)
+    if end == -1 :		# this part prints the name of bacteria
       print(names[start])      	# given the bacteria's "id" 
       return 'nothing'		# and skips the rest of the program
     
     count = start
-    # check_list = names[start:(start + 100) ]
+    check_list = names[start:  ]#   end]
     
+    skip = []
     print('start going through the list...')
-    for name in names:
+    for name in check_list:
       ftp_host.chdir(name)
       
       if "latest_assembly_versions" not in ftp_host.listdir(ftp_host.curdir):
 	#mark down bacteria w/o latest_assembly_versions 
 	print(str(count) + ')' + name + "\n")
+	skip.append(str(count))
 
       else:
 	print(count)
@@ -123,7 +127,33 @@ def check(): # checks which bacteria we can skip
 
       count += 1
     print('Checked upto (but excluding): ', count) # '''
+    
+    print(' ][ '.join(skip))
+   
+   
+def create_skip(): # writes down the bacteria that we can skip
+  outfile = open('skipBacteria.txt','a')
+  
+  print('Connecting to server...')
+  
+  startDIR = "./genomes/genbank/bacteria/"
+  with ftputil.FTPHost("ftp.ncbi.nlm.nih.gov",'anonymous','') as ftp_host:
+    ftp_host.chdir(startDIR)
+    names = ftp_host.listdir(ftp_host.curdir)
+    
+    print('Connected to server...')
+    
+    skip_ids = [586,757,825,2866,2801,2486,2047,1498,4406,4388,3401,3650,6011,6254,5693,5232,5814,5763,6680,9166,7386,6860,7563,7986,6575,10529,10530,10158,10161,10214,10434,10047,11100,11029,11481,11522,11547,12001,12217,13211,12228,12742,12912,12916,13009]
+    
+    skip_ids.sort()
+    
+    print('start going through the list...')
+    for id in skip_ids:
+      print(id)
+      outfile.write(str(id) + ') ' + names[id] + '\n')
       
+    print('done')
+   
 '''
 if (len(sys.argv) < 4):
     print("USAGE: python ftp_download.py species_start_id file_start_id bacteria_name_starts_with [bacteria_only_start_at]")
@@ -138,4 +168,5 @@ file_count = int(sys.argv[4]) # '''
 
 # create_summary()
 # download()
-check()
+#check()
+create_skip()
