@@ -28,38 +28,38 @@ def bacteria_check(bacteria_list, bacteria):
 # Functions for creating summary, and species and accession list
 
 def create_summary():
-    path = os.path.normpath(os.path.join(os.getcwd(), "summary"))
+    path = os.path.normpath(os.path.join(os.getcwd(), "1.summary"))
     if os.path.exists(path.strip()):
         print("Summary file found. New reports will be published on it...")
     else:
         print("creating new summary...")
-        summary = open("summary",'w')
+        summary = open("1.summary",'w')
 
 def create_species_list():
-    path = os.path.normpath(os.path.join(os.getcwd(), "species_list"))
+    path = os.path.normpath(os.path.join(os.getcwd(), "2.species_list"))
     if os.path.exists(path.strip()):
         print("appending to existing species list...")
     else:
         print("creating new species list...")
-        species_file = open("species_list",'w')
+        species_file = open("2.species_list",'w')
         update_species_list (species_file, "species_key", "species_name")
 
 def create_accession_list():
-    path = os.path.normpath(os.path.join(os.getcwd(), "accession_list"))
+    path = os.path.normpath(os.path.join(os.getcwd(), "3.accession_list"))
     if os.path.exists(path.strip()):
         print("appending to existing accession file...")
     else:
         print("creating new accession file...")
-        accession_file = open("accession_list",'w')
+        accession_file = open("3.accession_list",'w')
         update_accession_list (accession_file, "accession_key", "accession_name", "species_key")
 
 def create_no_accession_list():
-    path = os.path.normpath(os.path.join(os.getcwd(), "no_accession_list"))
+    path = os.path.normpath(os.path.join(os.getcwd(), "4.no_accession_list"))
     if os.path.exists(path.strip()):
         print("appending to existing no accession list file...")
     else:
         print("creating new no accession list file...")
-        no_accession_file = open("no_accession_list",'w')
+        no_accession_file = open("4.no_accession_list",'w')
         no_accession_file.write("species_name")
 
 def update_species_list(file, species_key, bacteria_name):
@@ -70,10 +70,10 @@ def update_accession_list(file, accession_key, accession_name, species_key):
 
 def download(bacteria_key, accession_key):
     # opening all the files that will be edited
-    summary = open("summary", 'a')
-    species_file = open("species_list", 'a')
-    accession_file = open("accession_list", 'a')
-    no_accession_file = open("no_accession_list", 'a')
+    summary = open("1.summary", 'a')
+    species_file = open("2.species_list", 'a')
+    accession_file = open("3.accession_list", 'a')
+    no_accession_file = open("4.no_accession_list", 'a')
 
     startDIR = "/genomes/genbank/bacteria/"
 
@@ -109,14 +109,21 @@ def download(bacteria_key, accession_key):
                 print ("bacteria does not have a latest_assembly_versions folder: " + bacteria_name)
                 no_accession_file.write(bacteria_name + "\n")
                 ftp_host.chdir("../")
-                break
+                continue
 
             ftp_host.chdir("latest_assembly_versions")
             assembly_list = ftp_host.listdir(ftp_host.curdir)
 
+            # setting the max number of strains from each species to 100. initializing variable
+            max_accession_count = 0
+
             for assembly in assembly_list:
                 # accessing every assembly folder in the species folder
                 ftp_host.chdir(assembly)
+
+                # max_accession_count check. if its more than 25 from same species stop downloading from that species
+                if (max_accession_count > 24):
+                    break
 
                 files = ftp_host.listdir(ftp_host.curdir)
                 for file in files:
@@ -135,6 +142,9 @@ def download(bacteria_key, accession_key):
 
                 # moving back to the folder with all the assemblies
                 ftp_host.chdir("../")
+
+                # increasing accession count
+                max_accession_count += 1
 
             # moving back to startDIR because all the assembly folders are symlinks
             ftp_host.chdir(startDIR)

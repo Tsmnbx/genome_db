@@ -1,0 +1,70 @@
+2016-08-14 01:06:17.625838
+Downloaded: from Abiotrophia_defectiva to Acetivibrio_cellulolyticus
+bacteria_key [start]: 1
+accession_key [start]1
+bacteria_key [stop]: 5
+accession_key [stop]: 5
+------------------------------------------------
+2016-08-14 01:08:18.605893
+Downloaded: from Acetivibrio_ethanolgignens to Acetobacter_pomorum
+bacteria_key [start]: 6
+accession_key [start]6
+bacteria_key [stop]: 20
+accession_key [stop]: 46
+------------------------------------------------
+2016-08-14 01:13:09.188570
+Downloaded: from Acetobacter_senegalensis to Kytococcus_sedentarius
+bacteria_key [start]: 21
+accession_key [start]47
+bacteria_key [stop]: 550
+accession_key [stop]: 2496
+------------------------------------------------
+2016-08-14 03:13:14.333334
+Downloaded: from Aeromicrobium_sp._REDSEA-S29_B11 to Caminibacter_mediatlanticus
+bacteria_key [start]: 551
+accession_key [start]2497
+bacteria_key [stop]: 2404
+accession_key [stop]: 8384
+------------------------------------------------
+2016-08-14 08:04:25.284306
+Downloaded: from Campylobacter_coli to Dysgonomonas_sp._HGC4
+bacteria_key [start]: 2405
+accession_key [start]8385
+bacteria_key [stop]: 2417
+accession_key [stop]: 9859
+------------------------------------------------
+2016-08-15 01:21:16.673643
+Downloaded: from Campylobacter_lari to Phaeobacter_sp._S60
+bacteria_key [start]: 2418
+accession_key [start]9860
+bacteria_key [stop]: 8832
+accession_key [stop]: 21530
+------------------------------------------------
+2016-08-15 10:56:04.153220
+Downloaded: from Phaeodactylibacter_xiamenensis to Sphingomonas_adhaesiva
+bacteria_key [start]: 8833
+accession_key [start]21531
+bacteria_key [stop]: 8862
+accession_key [stop]: 21584
+------------------------------------------------
+2016-08-15 11:11:48.200699
+Downloaded: from Photobacterium_kishitanii to Photobacterium_kishitanii
+bacteria_key [start]: 8863
+accession_key [start]21585
+bacteria_key [start]: 8863
+accession_key [start]21592
+------------------------------------------------
+2016-08-15 11:22:13.458048
+Downloaded: from Photobacterium_leiognathi to Plautia_stali_symbiont
+bacteria_key [start]: 8864
+accession_key [start]: 21593
+bacteria_key [stop]: 8942
+accession_key [stop]: 21718
+------------------------------------------------
+2016-08-15 12:18:37.042073
+Downloaded: from Pleomorphomonas_koreensis to Sphingomonas_adhaesiva
+bacteria_key [start]: 8943
+accession_key [start]21719
+bacteria_key [stop]: 10853
+accession_key [stop]: 25078
+------------------------------------------------
