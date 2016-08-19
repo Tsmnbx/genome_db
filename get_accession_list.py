@@ -87,14 +87,16 @@ def download():
     #accession_file = open("3.accession_list", 'a')
     #no_accession_file = open("4.no_accession_list", 'a')
     #temp accession file for storing new accession list
-    temp_accesion_file = open("temp_accession_list", 'w')
+    temp_accession_file = open("temp_accession_list", 'w')
     list_file = open("list", 'r')
-    accession_key = 1
-    start_bacteria = "Abiotrophia_defectiva"
-    stop_bacteria = "Acetobacter_indonesiensis"
-    bacteria_key = 1
+    accession_key = 22963
+    start_bacteria = "Pseudomonas_sp._CF161"
+    stop_bacteria = "Sphingomonas_adhaesiva"
+    bacteria_key = 9581
     #reading in list as an array
     list_array = list_file.readlines()
+    for item in list_array:
+        item = item.strip()
 
     startDIR = "/genomes/genbank/bacteria/"
 
@@ -138,19 +140,29 @@ def download():
 
                 files = ftp_host.listdir(ftp_host.curdir)
                 for file in files:
+                    length = len(list_array)
+                    index = 0
                     if "_genomic.gbff.gz" in file:
-			
-			if file in list_array:
-                       	     update_temp_accession(file, accession_key, file.strip(".gz"), bacteria_key)
-			     print ("SUCCESS#" + str(accession_key) + ": " + file)
+                        if file.endswith('gz'):
+                            file = file[:-3]
+                        while index < length:
+                            compare = list_array[index]
+                            if compare[:-1] == file:
+                       	        update_temp_accession(temp_accession_file, accession_key, file, bacteria_key)
+                                print ("SUCCESS#" + str(accession_key) + ": " + file)
+                                accession_key += 1
+                                break
+                            else:
+                                index += 1
                         # stdout information about which file (strain) is being downloaded right now
-                        print ("file#" + str(accession_key) + ": " + file)
+                        if index == length:
+                            print ("No Match#" + str(accession_key) + ": " + file)
                         # downloading the file
                         #ftp_host.download(file,file)
 
                         # unzipping the file that is downloaded
                         #call(["gzip","-d",file])
-                        accession_key+=1
+
 
                 # moving back to the folder with all the assemblies
                 ftp_host.chdir("../")
@@ -196,4 +208,3 @@ def check():# this is used to show there're bacteria w/ +1 latest versions
 
 create_temp_accession()
 download()
-
