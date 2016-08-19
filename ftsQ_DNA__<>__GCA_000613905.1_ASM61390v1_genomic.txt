@@ -1,0 +1,34 @@
+# target name        accession      query name           accession  hmmfrom hmm to alifrom  ali to envfrom  env to  sq len strand   E-value  score  bias  description of target
+#-------------------     ---------- -------------------- ---------- ------- ------- ------- ------- ------- ------- ------- ------ --------- ------ ----- ---------------------
+BAJW01000072         BAJW01000072.1 ftsQ_DNA             -              370     721     449      78     469      13   14259    -     1.7e-06   26.2  14.3  Acetobacter persici JCM 25330 DNA, contig: JCM25330.contig00072,
+
+BAJW01000016         BAJW01000016.1 ftsQ_DNA             -               77     183   13756   13863   13738   13885   55347    +       0.047   11.5   3.7  Acetobacter persici JCM 25330 DNA, contig: JCM25330.contig00016,
+
+BAJW01000004         BAJW01000004.1 ftsQ_DNA             -              345     692   83639   83898   83619   83917   84202    +        0.17    9.7   2.2  Acetobacter persici JCM 25330 DNA, contig: JCM25330.contig00004,
+
+BAJW01000067         BAJW01000067.1 ftsQ_DNA             -              463     625    7082    6924    7104    6903   15516    -         1.1    7.0   4.1  Acetobacter persici JCM 25330 DNA, contig: JCM25330.contig00067,
+
+BAJW01000019         BAJW01000019.1 ftsQ_DNA             -               47     144   19857   19956   19846   19965   48232    +         1.2    6.9   3.4  Acetobacter persici JCM 25330 DNA, contig: JCM25330.contig00019,
+
+BAJW01000023         BAJW01000023.1 ftsQ_DNA             -              291     614   20680   20457   20704   20436   46967    -         1.4    6.6   4.0  Acetobacter persici JCM 25330 DNA, contig: JCM25330.contig00023,
+
+BAJW01000008         BAJW01000008.1 ftsQ_DNA             -              216     416   36437   36647   36416   36675   70627    +         1.8    6.3   1.5  Acetobacter persici JCM 25330 DNA, contig: JCM25330.contig00008,
+
+BAJW01000109         BAJW01000109.1 ftsQ_DNA             -              488     774    8331    8057    8355    8037    8982    -         2.4    5.9   7.9  Acetobacter persici JCM 25330 DNA, contig: JCM25330.contig00109,
+
+BAJW01000003         BAJW01000003.1 ftsQ_DNA             -              225     313   59830   59917   59809   59937   89661    +         7.4    4.3   4.2  Acetobacter persici JCM 25330 DNA, contig: JCM25330.contig00003,
+
+BAJW01000003         BAJW01000003.1 ftsQ_DNA             -              522     607   48407   48488   48331   48527   89661    +         8.5    4.1   2.4  Acetobacter persici JCM 25330 DNA, contig: JCM25330.contig00003,
+
+BAJW01000043         BAJW01000043.1 ftsQ_DNA             -              310     408    5114    5026    5134    5005   29943    -         9.1    4.0   1.7  Acetobacter persici JCM 25330 DNA, contig: JCM25330.contig00043,
+
+#
+# Program:         nhmmer
+# Version:         3.1b1 (May 2013)
+# Pipeline mode:   SEARCH
+# Query file:      ftsQ_DNA.hmm
+# Target file:     GCA_000613905.1_ASM61390v1_genomic.gbff.gz
+# Option settings: nhmmer --tblout ftsQ_DNA__<>__GCA_000613905.1_ASM61390v1_genomic.txt ftsQ_DNA.hmm GCA_000613905.1_ASM61390v1_genomic.gbff.gz 
+# Current dir:     /home/zion/Documents/igem/hmmer/python stuff
+# Date:            Fri Aug 19 11:54:32 2016
+# [ok]

@@ -1,0 +1,58 @@
+import sys
+
+if len(sys.argv) != 2:
+  print("please put in name of file to be parsed")
+  exit()
+  
+target_file = str(sys.argv[1])
+
+SEQ_ID = 1
+QUERY = 2
+ALI_F = 6
+ALI_T = 7
+ENV_F = 8
+ENV_T = 9
+SQ_LEN= 10
+STRAND= 11
+E_VAL = 12
+SCORE = 13
+BIAS  = 14
+
+try:
+  infile = open(target_file,'r')
+except IOError:
+  print("Can't open specified file, make sure it's in current dir")
+  exit()
+
+
+txts = infile.readlines()
+
+
+results = []
+for curr_line in txts:  
+  if curr_line[0] == '#':  # skip commented lines and empty lines
+    continue
+  elif len(curr_line.strip()) == 0:
+    continue
+    
+  line = curr_line.split()
+  
+  ALI_Len= str(int(line[ALI_T]) - int(line[ALI_F]))
+  
+  description = " ".join(line[15:])  # this line don't work for all cases
+  
+  results += [[line[QUERY],line[SEQ_ID],line[ALI_F],line[ALI_T],ALI_Len,
+	       line[STRAND],line[E_VAL],line[SCORE],description]]
+
+	       
+# right now the program creates new output files for every nhmmer search
+# to put all the parsed information of different searches into 1 file
+# you need to rewrite the following codes
+
+outfile = open("tblout_"+target_file,'w') 
+for hit in results:
+  outfile.write("\t".join(hit)+"\n")
+
+# Fix the above if nec.
+
+print("\n\n DONE")

@@ -1,0 +1,36 @@
+import subprocess
+
+# code taken from stackoverflow
+
+output = subprocess.Popen(['ls'],stdout=subprocess.PIPE).stdout.read()
+curr_dir_files = output.split()
+
+# code above stores current directory file names into a list
+
+
+print("got the current directory files:\n")
+print(curr_dir_files)
+
+hmm_files = []
+gbff_files= []
+
+for file in curr_dir_files:
+  print(file)
+  
+  if file.endswith(".hmm"):
+    hmm_files.append(file)
+    
+  elif file.endswith(".gbff.gz"):
+    gbff_files.append(file)
+    
+    
+for hmm_file in hmm_files:
+  for gbff_file in gbff_files:
+    hmm_name = hmm_file[:hmm_file.index(".hmm")] # name without ".hmm"
+    gbff_name= gbff_file[:gbff_file.index(".gbff.gz")] # just the name
+    
+    result_file = "{}__<>__{}.txt".format(hmm_name,gbff_name)
+    
+    print("Running nhmmer: [{}] against [{}]".format(hmm_name,gbff_name))
+    
+    subprocess.call(["nhmmer", "--tblout",result_file,hmm_file,gbff_file])
