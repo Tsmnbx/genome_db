@@ -62,18 +62,41 @@ def create_no_accession_list():
         no_accession_file = open("4.no_accession_list",'w')
         no_accession_file.write("species_name")
 
+def create_temp_accession():
+    path = os.path.normpath(os.path.join(os.getcwd(), "temp_accession_list"))
+    if os.path.exists(path.strip()):
+        print("appending to existing temp accession list file...")
+    else:
+        print("creating new temp accession list file...")
+        temp_accession_file = open("temp_accession_list",'w')
+        temp_accession_file.write("species_name")
+
 def update_species_list(file, species_key, bacteria_name):
     file.write(str(species_key) + "\t" + bacteria_name + "\n")
 
 def update_accession_list(file, accession_key, accession_name, species_key):
     file.write(str(accession_key) + "\t" + accession_name + "\t" + str(species_key) + "\n")
 
-def download(bacteria_key, accession_key):
+def update_temp_accession(file, accession_key, accession_name, species_key):
+    file.write(str(accession_key) + "\t" + accession_name + "\t" + str(species_key) + "\n")
+
+def download():
     # opening all the files that will be edited
-    summary = open("1.summary", 'a')
-    species_file = open("2.species_list", 'a')
-    accession_file = open("3.accession_list", 'a')
-    no_accession_file = open("4.no_accession_list", 'a')
+    #summary = open("1.summary", 'a')
+    #species_file = open("2.species_list", 'a')
+    #accession_file = open("3.accession_list", 'a')
+    #no_accession_file = open("4.no_accession_list", 'a')
+    #temp accession file for storing new accession list
+    temp_accession_file = open("temp_accession_list", 'w')
+    list_file = open("list", 'r')
+    accession_key = 22963
+    start_bacteria = "Pseudomonas_sp._CF161"
+    stop_bacteria = "Sphingomonas_adhaesiva"
+    bacteria_key = 9581
+    #reading in list as an array
+    list_array = list_file.readlines()
+    for item in list_array:
+        item = item.strip()
 
     startDIR = "/genomes/genbank/bacteria/"
 
@@ -91,23 +114,17 @@ def download(bacteria_key, accession_key):
         for i in range(bacteria_start_id, bacteria_stop_id+1):
             print (bacteria_list[i])
 
-        # updating summary
-        summary.write (str(datetime.datetime.now()) + "\n")
-        summary.write ("Downloaded: from " + start_bacteria + " to " + stop_bacteria + "\n")
-        summary.write ("bacteria_key [start]: " + str(bacteria_key) + "\n")
-        summary.write ("accession_key [start]" + str(accession_key) + "\n")
-
         for i in range(bacteria_start_id, bacteria_stop_id+1):
             #loop through the bacteria being downloaded
             bacteria_name = bacteria_list[i]
-            update_species_list(species_file, bacteria_key, bacteria_name)
+            #update_species_list(species_file, bacteria_key, bacteria_name)
 
             print ("\nSPECIES#" + str(bacteria_key) + ": "+ bacteria_name)
             ftp_host.chdir(bacteria_name)
 
             if ("latest_assembly_versions" not in ftp_host.listdir(ftp_host.curdir)):
                 print ("bacteria does not have a latest_assembly_versions folder: " + bacteria_name)
-                no_accession_file.write(bacteria_name + "\n")
+            #    no_accession_file.write(bacteria_name + "\n")
                 ftp_host.chdir("../")
                 continue
 
@@ -121,24 +138,31 @@ def download(bacteria_key, accession_key):
                 # accessing every assembly folder in the species folder
                 ftp_host.chdir(assembly)
 
-                # max_accession_count check. if its more than 25 from same species stop downloading from that species
-                if (max_accession_count > 24):
-                    break
-
                 files = ftp_host.listdir(ftp_host.curdir)
                 for file in files:
+                    length = len(list_array)
+                    index = 0
                     if "_genomic.gbff.gz" in file:
-                        update_accession_list(accession_file, accession_key, file.strip(".gz"), bacteria_key)
-
+                        if file.endswith('gz'):
+                            file = file[:-3]
+                        while index < length:
+                            compare = list_array[index]
+                            if compare[:-1] == file:
+                       	        update_temp_accession(temp_accession_file, accession_key, file, bacteria_key)
+                                print ("SUCCESS#" + str(accession_key) + ": " + file)
+                                accession_key += 1
+                                break
+                            else:
+                                index += 1
                         # stdout information about which file (strain) is being downloaded right now
-                        print ("file#" + str(accession_key) + ": " + file)
+                        if index == length:
+                            print ("No Match#" + str(accession_key) + ": " + file)
                         # downloading the file
-                        ftp_host.download(file,file)
+                        #ftp_host.download(file,file)
 
                         # unzipping the file that is downloaded
-                        print ("Unzipping")
-                        call(["gzip","-d",file])
-                        accession_key+=1
+                        #call(["gzip","-d",file])
+
 
                 # moving back to the folder with all the assemblies
                 ftp_host.chdir("../")
@@ -151,9 +175,9 @@ def download(bacteria_key, accession_key):
             bacteria_key += 1
 
         # updating summary
-        summary.write ("bacteria_key [stop]: " + str(bacteria_key-1) + "\n")
-        summary.write ("accession_key [stop]: " + str(accession_key-1) + "\n")
-        summary.write ("------------------------------------------------\n")
+        #summary.write ("bacteria_key [stop]: " + str(bacteria_key-1) + "\n")
+        #summary.write ("accession_key [stop]: " + str(accession_key-1) + "\n")
+        #summary.write ("------------------------------------------------\n")
 
         print("done downloading")
 
@@ -182,17 +206,5 @@ def check():# this is used to show there're bacteria w/ +1 latest versions
     print("{}:  {}".format(amt,vers_to_amt[amt])) # amt of vers : count
 '''
 
-if (len(sys.argv) == 5):
-    start_bacteria = sys.argv[1]
-    stop_bacteria = sys.argv[2]
-    bacteria_key = int(sys.argv[3])
-    accession_key = int(sys.argv[4])
-
-    create_summary()
-    create_species_list()
-    create_accession_list()
-    download(bacteria_key, accession_key)
-
-elif (len(sys.argv) < 5):
-    print("USAGE: python ftp_download.py  start_bacteria  stop_bacteria  species_id_start  accession_id_start")
-    exit()
+create_temp_accession()
+download()
