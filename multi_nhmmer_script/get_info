@@ -49,7 +49,7 @@ for curr_line in txts:
 # to put all the parsed information of different searches into 1 file
 # you need to rewrite the following codes
 
-outfile = open("tblout_"+target_file,'w') 
+outfile = open("parsed_"+target_file,'w') 
 for hit in results:
   outfile.write("\t".join(hit)+"\n")
 
