@@ -86,7 +86,7 @@ def recover():
 
     startDIR = "/genomes/genbank/bacteria/"
     accession_key = 1
-    
+
     #reading in list as an array
     list_array_org = list_file.readlines()
     list_array = []
