@@ -546,8 +546,6 @@ species_key	species_name
 548	Aeromicrobium_sp._Leaf272
 549	Aeromicrobium_sp._Leaf289
 550	Aeromicrobium_sp._Leaf291
-551	Aeromicrobium_sp._REDSEA-S29_B11
-551	Aeromicrobium_sp._REDSEA-S29_B11
 551	Aeromicrobium_sp._REDSEA-S32_B7
 552	Aeromicrobium_sp._REDSEA-S35_B1
 553	Aeromicrobium_sp._REDSEA-S38_B2
@@ -823,7 +821,6 @@ species_key	species_name
 823	Altererythrobacter_namhicola
 824	Altererythrobacter_sp._MH-B5
 825	Altererythrobacter_sp._Root672
-826	Altererythrobacter_sp._XY-R17
 826	Altererythrobacter_troitsensis
 827	Alteromonadaceae_bacterium_Bs12
 828	Alteromonadaceae_bacterium_XY-R5
@@ -1495,7 +1492,6 @@ species_key	species_name
 1494	Bacillus_sp._SGD-V-76
 1495	Bacillus_sp._SIT1
 1496	Bacillus_sp._SIT10
-1497	Bacillus_sp._SIT16
 1497	Bacillus_sp._SJS
 1498	Bacillus_sp._SM1
 1499	Bacillus_sp._Soil531
@@ -2049,7 +2045,6 @@ species_key	species_name
 2047	Bradyrhizobium_sp._STM_3809
 2048	Bradyrhizobium_sp._STM_3843
 2049	Bradyrhizobium_sp._Tv2a-2
-2050	Bradyrhizobium_sp._UASWS1016
 2050	Bradyrhizobium_sp._URHA0002
 2051	Bradyrhizobium_sp._URHA0013
 2052	Bradyrhizobium_sp._URHD0069
@@ -2313,7 +2308,6 @@ species_key	species_name
 2310	Butyricicoccus_sp._K4410.MGS-46
 2311	Butyricicoccus_sp._N15.MGS-46
 2312	Butyricicoccus_sp._N54.MGS-46
-2313	Butyricimonas_sp._AT11
 2313	Butyricimonas_sp._Marseille-P2440
 2314	Butyricimonas_synergistica
 2315	Butyricimonas_virosa
@@ -2741,7 +2735,6 @@ species_key	species_name
 2737	Candidatus_Magnetoglobus_multicellularis
 2738	Candidatus_Magnetomorum_sp._HK-1
 2739	Candidatus_Magnetoovum_chiemensis
-2740	Candidatus_Marinimicrobia_bacterium_REDSEA-S09_B5
 2740	Candidatus_Marinimicrobia_bacterium_REDSEA-S14_B6
 2741	Candidatus_Marinimicrobia_bacterium_REDSEA-S15_B10
 2742	Candidatus_Marinimicrobia_bacterium_REDSEA-S15_B13
@@ -3396,7 +3389,6 @@ species_key	species_name
 3391	Chryseobacterium_sp._YR480
 3392	Chryseobacterium_sp._YR485
 3393	Chryseobacterium_sp._YR561
-3394	Chryseobacterium_taeanense
 3394	Chryseobacterium_taiwanense
 3395	Chryseobacterium_vrystaatense
 3396	Chrysiogenes_arsenatis
@@ -3645,7 +3637,6 @@ species_key	species_name
 3639	Clostridium_cylindrosporum
 3640	Clostridium_dakarense
 3641	Clostridium_diolis
-3642	Clostridium_disporicum
 3642	Clostridium_drakei
 3643	Clostridium_haemolyticum
 3644	Clostridium_hathewayi_CAG_224
@@ -4383,7 +4374,6 @@ species_key	species_name
 4376	Devosia_chinhatensis
 4377	Devosia_epidermidihirudinis
 4378	Devosia_geojensis
-4379	Devosia_insulae
 4379	Devosia_limi
 4380	Devosia_psychrophila
 4381	Devosia_riboflavina
@@ -4401,7 +4391,6 @@ species_key	species_name
 4393	Devosia_sp._Root635
 4394	Devosia_sp._Root685
 4395	Devosia_sp._S37
-4396	Devosia_subaequoris
 4396	Devriesea_agamarum
 4397	Dialister_invisus
 4398	Dialister_invisus_CAG_218
@@ -4564,7 +4553,6 @@ species_key	species_name
 4555	Ensifer_glycinis
 4556	Ensifer_sojae
 4557	Ensifer_sp._BR816
-4558	Ensifer_sp._CCBAU_251167
 4558	Ensifer_sp._JGI_0001011-A08
 4559	Ensifer_sp._LC11
 4560	Ensifer_sp._LC13
@@ -5228,7 +5216,6 @@ species_key	species_name
 5218	Fructobacillus_tropaeoli
 5219	Fulvimarina_pelagi
 5220	Fulvivirga_imtechensis
-5221	Fusicatenibacter_saccharivorans
 5221	Fusobacterium_equinum
 5222	Fusobacterium_gonidiaformans
 5223	Fusobacterium_hwasookii
@@ -5689,7 +5676,6 @@ species_key	species_name
 5678	Herbidospora_mongoliensis
 5679	Herbidospora_sakaeratensis
 5680	Herbidospora_yilanensis
-5681	Herbinix_sp._SD1D
 5681	Herminiimonas_arsenicoxydans
 5682	Herminiimonas_sp._CN
 5683	Herpetosiphon_aurantiacus
@@ -5760,7 +5746,6 @@ species_key	species_name
 5748	Hyphomicrobium_nitrativorans
 5749	Hyphomicrobium_sp._802
 5750	Hyphomicrobium_sp._99
-5751	Hyphomicrobium_sp._GJ21
 5751	Hyphomicrobium_sp._MC1
 5752	Hyphomicrobium_sulfonivorans
 5753	Hyphomicrobium_zavarzinii
@@ -5811,7 +5796,6 @@ species_key	species_name
 5798	Intestinibacter_bartlettii
 5799	Intestinimonas_butyriciproducens
 5800	Intestinimonas_sp._GD2
-5801	Intestinimonas_sp._GM5
 5801	Intrasporangiaceae_bacterium_JGI_0001002-M5
 5802	Intrasporangiaceae_bacterium_URHB0013
 5803	Intrasporangium_calvum
@@ -6008,7 +5992,6 @@ species_key	species_name
 5994	Lachnoclostridium_phytofermentans
 5995	Lachnoclostridium_sp._YL32
 5996	Lachnospira_multipara
-5997	Lachnospira_pectinoschiza
 5997	Lachnospiraceae_bacterium_10-1
 5998	Lachnospiraceae_bacterium_1_1_57FAA
 5999	Lachnospiraceae_bacterium_1_4_56FAA
@@ -6251,7 +6234,6 @@ species_key	species_name
 6236	Lactobacillus_xiangfangensis
 6237	Lactobacillus_zeae
 6238	Lactobacillus_zymae
-6239	Lactococcus_chungangensis
 6239	Lactococcus_fujiensis
 6240	Lactococcus_garvieae
 6241	Lactococcus_lactis
@@ -6677,7 +6659,6 @@ species_key	species_name
 6661	Marinobacter_sp._REDSEA-S15_B16
 6662	Marinobacter_sp._REDSEA-S21_B2N3
 6663	Marinobacter_sp._REDSEA-S27_B10
-6664	Marinobacter_sp._REDSEA-S33_B14N21
 6664	Marinobacter_sp._T13-3
 6665	Marinobacter_sp._YWL01
 6666	Marinobacter_subterrani
@@ -6857,7 +6838,6 @@ species_key	species_name
 6840	Mesorhizobium_sp._Root695
 6841	Mesorhizobium_sp._SOD10
 6842	Mesorhizobium_sp._STM_4661
-6843	Mesorhizobium_sp._UASWS1009
 6843	Mesorhizobium_sp._URHA0056
 6844	Mesorhizobium_sp._URHB0007
 6845	Mesorhizobium_sp._URHC0008
@@ -7384,7 +7364,6 @@ species_key	species_name
 7366	Mycobacterium_rhodesiae
 7367	Mycobacterium_rufum
 7368	Mycobacterium_rutilum
-7369	Mycobacterium_saopaulense
 7369	Mycobacterium_scrofulaceum
 7370	Mycobacterium_senegalense
 7371	Mycobacterium_septicum
@@ -7561,7 +7540,6 @@ species_key	species_name
 7542	Mycoplasma_alkalescens
 7543	Mycoplasma_alligatoris
 7544	Mycoplasma_alvi
-7545	Mycoplasma_amphoriforme
 7545	Mycoplasma_anatis
 7546	Mycoplasma_anseris
 7547	Mycoplasma_arginini
@@ -7984,7 +7962,6 @@ species_key	species_name
 7964	Novosphingobium_sp._KN65.2
 7965	Novosphingobium_sp._Leaf2
 7966	Novosphingobium_sp._MBES04
-7967	Novosphingobium_sp._MD-1
 7967	Novosphingobium_sp._P6W
 7968	Novosphingobium_sp._PP1Y
 7969	Novosphingobium_sp._Rr_2-17
@@ -9165,7 +9142,6 @@ species_key	species_name
 9145	Prochlorococcus_sp._MIT_0801
 9146	Prochlorococcus_sp._MIT_1303
 9147	Prochlorococcus_sp._MIT_1306
-9148	Prochlorococcus_sp._REDSEA-S04_B1
 9148	Prochlorococcus_sp._REDSEA-S17_B1
 9149	Prochlorococcus_sp._REDSEA-S22_B1
 9150	Prochlorococcus_sp._REDSEA-S23_B1
@@ -9751,7 +9727,6 @@ species_key	species_name
 9730	Pseudomonas_sp._TAD18
 9731	Pseudomonas_sp._TJI-51
 9732	Pseudomonas_sp._TKP
-9733	Pseudomonas_sp._TMW_2.1634
 9733	Pseudomonas_sp._TTU2014-066ASC
 9734	Pseudomonas_sp._TTU2014-080ASC
 9735	Pseudomonas_sp._TTU2014-096BSC
@@ -10048,7 +10023,6 @@ species_key	species_name
 10026	Rhizobium_sp._JGI_001012-K08
 10027	Rhizobium_sp._JGI_001013-F22
 10028	Rhizobium_sp._JGI_001014-O06
-10029	Rhizobium_sp._KAs_5-22
 10029	Rhizobium_sp._LC145
 10030	Rhizobium_sp._LMB-1
 10031	Rhizobium_sp._Leaf155
@@ -10157,10 +10131,8 @@ species_key	species_name
 10134	Rhodobacteraceae_bacterium_KLH11
 10135	Rhodobacteraceae_bacterium_O3.65
 10136	Rhodobacteraceae_bacterium_PD-2
-10137	Rhodobacteraceae_bacterium_REDSEA-S01_B4
 10137	Rhodobacteraceae_bacterium_REDSEA-S02_B3
 10138	Rhodobacteraceae_bacterium_REDSEA-S03_B4
-10139	Rhodobacteraceae_bacterium_REDSEA-S10_B12
 10139	Rhodobacteraceae_bacterium_REDSEA-S11_B6
 10140	Rhodobacteraceae_bacterium_REDSEA-S29_B10
 10141	Rhodobacteraceae_bacterium_REDSEA-S34_B6
@@ -10213,7 +10185,6 @@ species_key	species_name
 10188	Rhodococcus_sp._EsD8
 10189	Rhodococcus_sp._HA99
 10190	Rhodococcus_sp._HS-D2
-10191	Rhodococcus_sp._IITR03
 10191	Rhodococcus_sp._JCM_3009
 10192	Rhodococcus_sp._JCM_9791
 10193	Rhodococcus_sp._JCM_9793
@@ -10434,7 +10405,6 @@ species_key	species_name
 10408	Ruminococcaceae_bacterium_D16
 10409	Ruminococcaceae_bacterium_GD1
 10410	Ruminococcaceae_bacterium_GD6
-10411	Ruminococcaceae_bacterium_GD7
 10411	Ruminococcaceae_bacterium_cv2
 10412	Ruminococcaceae_bacterium_mt9
 10413	Ruminococcus_albus
@@ -10529,8 +10499,6 @@ species_key	species_name
 10502	SAR86_cluster_bacterium_REDSEA-S09_B4
 10503	SAR86_cluster_bacterium_REDSEA-S20_B12N4
 10504	SAR86_cluster_bacterium_REDSEA-S21_B7
-10505	SAR86_cluster_bacterium_REDSEA-S38_B7
-10505	SAR86_cluster_bacterium_REDSEA-S39_B13N6
 10505	SAR86_cluster_bacterium_REDSEA-S45_B6
 10506	SAR86_cluster_bacterium_SAR86A
 10507	SAR86_cluster_bacterium_SAR86B
@@ -11029,7 +10997,6 @@ species_key	species_name
 11000	Sphingopyxis_sp._REDSEA-S22_B5
 11001	Sphingopyxis_sp._REDSEA-S23_B6
 11002	Sphingopyxis_sp._REDSEA-S24_B7
-11003	Sphingopyxis_sp._REDSEA-S28_B10N12
 11003	Sphingopyxis_sp._REDSEA-S29_B3
 11004	Sphingopyxis_sp._REDSEA-S34_B10
 11005	Sphingopyxis_sp._REDSEA-S38_B16
@@ -11100,7 +11067,6 @@ species_key	species_name
 11070	Sporosarcina_globispora
 11071	Sporosarcina_koreensis
 11072	Sporosarcina_newyorkensis
-11073	Sporosarcina_pasteurii
 11073	Sporosarcina_psychrophila
 11074	Sporosarcina_sp._D27
 11075	Sporosarcina_sp._EUR3_2.2.2
@@ -11548,7 +11514,6 @@ species_key	species_name
 11517	Streptomyces_sp._AVP053U2
 11518	Streptomyces_sp._AW19M42
 11519	Streptomyces_sp._AcH_505
-11520	Streptomyces_sp._AgN23
 11520	Streptomyces_sp._Amel2xE9
 11521	Streptomyces_sp._BoleA5
 11522	Streptomyces_sp._C
@@ -12003,7 +11968,6 @@ species_key	species_name
 11971	Synechococcus_sp._RCC307
 11972	Synechococcus_sp._REDSEA-S01_B1
 11973	Synechococcus_sp._REDSEA-S02_B4
-11974	Synechococcus_sp._REDSEA-S40_B16N2
 11974	Synechococcus_sp._RS9916
 11975	Synechococcus_sp._RS9917
 11976	Synechococcus_sp._UTEX_2973
@@ -12219,7 +12183,6 @@ species_key	species_name
 12186	Thermodesulfovibrio_yellowstonii
 12187	Thermogemmatispora_carboxidivorans
 12188	Thermomicrobium_roseum
-12189	Thermomonas_brevis
 12189	Thermomonas_fusca
 12190	Thermomonospora_curvata
 12191	Thermonema_rossianum
@@ -12230,7 +12193,6 @@ species_key	species_name
 12196	Thermosinus_carboxydivorans
 12197	Thermosipho_africanus
 12198	Thermosipho_melanesiensis
-12199	Thermosipho_sp._1070
 12199	Thermosulfidibacter_takaii
 12200	Thermosulfurimonas_dismutans
 12201	Thermosynechococcus_elongatus
@@ -12744,7 +12706,6 @@ species_key	species_name
 12709	Wohlfahrtiimonas_chitiniclastica
 12710	Wolbachia_endosymbiont_of_Brugia_malayi
 12711	Wolbachia_endosymbiont_of_Cimex_lectularius
-12712	Wolbachia_endosymbiont_of_Culex_molestus
 12712	Wolbachia_endosymbiont_of_Culex_pipiens_molestus
 12713	Wolbachia_endosymbiont_of_Culex_quinquefasciatus
 12714	Wolbachia_endosymbiont_of_Dactylopius_coccus
