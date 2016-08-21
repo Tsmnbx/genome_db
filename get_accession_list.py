@@ -154,6 +154,7 @@ def download():
                                 break
                             else:
                                 index += 1
+                        
                         # stdout information about which file (strain) is being downloaded right now
                         if index == length:
                             print ("No Match#" + str(accession_key) + ": " + file)
@@ -162,7 +163,7 @@ def download():
 
                         # unzipping the file that is downloaded
                         #call(["gzip","-d",file])
-
+                        
 
                 # moving back to the folder with all the assemblies
                 ftp_host.chdir("../")
