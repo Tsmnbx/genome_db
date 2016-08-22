@@ -6,14 +6,14 @@ from Bio import SeqIO
 
 
 ### printing location features
-def is_WGS(genome):
-    keywords = genome.annotations["keywords"][0]
+def is_WGS(locus):
+    keywords = locus.annotations["keywords"][0]
     if ("WGS" in keywords):
         return True
     return False
 
-def get_locus(genome):
-    return genome.name
+def get_locus_name(locus):
+    return locus.name
 
 def get_species_name(source):
     genus = source.qualifiers["organism"][0].split()[0]
@@ -30,21 +30,21 @@ def get_subspecies(source):
         subspecies = source.qualifiers["sub_species"][0]
         return subspecies
     else:
-        return null
+        return None
 
 def get_strain(source):
     if ("strain" in source.qualifiers.keys()):
         strain = source.qualifiers["strain"][0]
         return strain
     else:
-        return null
+        return None
 
 def get_sub_strain(source):
     if ("sub_strain" in source.qualifiers.keys()):
         sub_strain = source.qualifiers["sub_strain"][0]
         return sub_strain
     else:
-        return null
+        return None
 
 def get_taxon(source):
     taxon = int(source.qualifiers["db_xref"][0].split(":")[1])
@@ -62,19 +62,13 @@ def get_qualifier(CDS,qualifier):
         if ("gene" in CDS.qualifiers.keys()):
             return CDS.qualifiers["gene"][0]
         else:
-            return null
+            return None
 
     elif (qualifier == "gene_synonym"):
         if ("gene_synonym" in CDS.qualifiers.keys()):
             return CDS.qualifiers["gene_synonym"]
         else:
-            return null
-
-    elif (qualifier == "gene"):
-        if ("gene" in CDS.qualifiers.keys()):
-            return CDS.qualifiers["gene"][0]
-        else:
-            return null
+            return None
 
     elif (qualifier == "locus_tag"):
         return CDS.qualifiers["locus_tag"][0]
@@ -83,22 +77,25 @@ def get_qualifier(CDS,qualifier):
         if ("EC_number" in CDS.qualifiers.keys()):
             return CDS.qualifiers["EC_number"]
         else:
-            return null
+            return None
 
     elif (qualifier == "protein_id"):
-        return CDS.qualifiers["protein_id"][0]
+        if ("protein_id" in CDS.qualifiers.keys()):
+            return CDS.qualifiers["protein_id"][0]
+        else:
+            return None
 
     elif (qualifier == "function"):
         if ("function" in CDS.qualifiers.keys()):
             return CDS.qualifiers["function"][0].split(";")
         else:
-            return null
+            return None
 
     elif (qualifier == "note"):
         if ("note" in CDS.qualifiers.keys()):
             return CDS.qualifiers["note"][0].split(";")
         else:
-            return null
+            return None
 
     elif (qualifier == "Pfam"):
         if ("note" in CDS.qualifiers.keys()):
@@ -106,19 +103,19 @@ def get_qualifier(CDS,qualifier):
                 if ("Pfam" in tag):
                     return tag
         else:
-            return null
+            return None
 
     elif (qualifier == "UniProt"):
         for ref in CDS.qualifiers["db_xref"]:
             if ("UniProt" in ref):
                 return ref.split(":")[1].split(":")
-        return null
+        return None
 
     elif (qualifier == "GI"):
         for ref in CDS.qualifiers["db_xref"]:
             if ("GI" in ref):
                 return int(ref.split(":")[1])
-        return null
+        return None
 
     elif (qualifier == "translation"):
         return CDS.qualifiers["translation"][0]
@@ -143,11 +140,11 @@ def get_strand(CDS):
     return strand
 
 
-genome = list(SeqIO.parse("abcd.gbff","genbank"))
-locus = genome[0]
+# genome = list(SeqIO.parse("ecoli.gbff","genbank"))
+# locus = genome[0]
 
-source = locus.features[0]
-CDS = locus.features[2]
+# source = locus.features[0]
+# CDS = locus.features[11]
 
 # print (is_WGS(locus))
 # print (get_species_name(locus))
@@ -163,4 +160,5 @@ CDS = locus.features[2]
 # print (get_qualifier(CDS,"codon_start"))
 # print (get_qualifier(CDS,"product"))
 # print (get_qualifier(CDS,"protein_id"))
+# print (CDS)
 # print (get_qualifier(CDS,"translation"))
