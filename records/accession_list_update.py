@@ -13,6 +13,12 @@ for num in range(len(lines)):
     continue
   
   items = lines[num].split()
+  
+  int_id = int(items[2])
+  if int_id > 8942:
+    outfile.write('\t'.join([str(num),items[1],str(int_id-1)]) + '\n')
+    continue
+      
   outfile.write('\t'.join([str(num),items[1],items[2]]) + '\n')
 
 infile.close()
