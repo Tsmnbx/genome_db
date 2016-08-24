@@ -12,8 +12,8 @@ for num in range(len(lines)):
     outfile.write(lines[num])
     continue
   
-  
-  outfile.write('\t'.join(str(num),lines[num].split()[1:]) + '\n')
+  items = lines[num].split()
+  outfile.write('\t'.join([str(num),items[1],items[2]]) + '\n')
 
 infile.close()
 outfile.close()
