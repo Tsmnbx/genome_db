@@ -6,42 +6,120 @@ from Bio import SeqIO
 
 
 ### printing location features
-def is_WGS(genome):
-    keywords = genome.annotations["keywords"][0]
+def is_WGS(locus):
+    keywords = locus.annotations["keywords"][0]
     if ("WGS" in keywords):
         return True
     return False
 
-def get_locus(genome):
-    return genome.name
+def get_locus_name(locus):
+    return locus.name
 
-def get_species_name(genome):
-    genus = genome.annotations["source"].split()[0]
-    species = genome.annotations["source"].split()[1]
+def get_species_name(source):
+    genus = source.qualifiers["organism"][0].split()[0]
+    species = source.qualifiers["organism"][0].split()[1]
     name = genus + "_" + species
     return name
 
-def get_subspecies(source):
+def get_species_name(source):
     subspecies = source.qualifiers["sub_species"][0]
     return subspecies
 
+def get_subspecies(source):
+    if ("sub_species" in source.qualifiers.keys()):
+        subspecies = source.qualifiers["sub_species"][0]
+        return subspecies
+    else:
+        return None
+
 def get_strain(source):
-    strain = source.qualifiers["strain"][0]
-    return strain
+    if ("strain" in source.qualifiers.keys()):
+        strain = source.qualifiers["strain"][0]
+        return strain
+    else:
+        return None
+
+def get_sub_strain(source):
+    if ("sub_strain" in source.qualifiers.keys()):
+        sub_strain = source.qualifiers["sub_strain"][0]
+        return sub_strain
+    else:
+        return None
 
 def get_taxon(source):
     taxon = int(source.qualifiers["db_xref"][0].split(":")[1])
     return taxon
 
 def get_qualifier(CDS,qualifier):
+
     if (qualifier == "codon_start"):
         return int(CDS.qualifiers["codon_start"][0])
+
     elif (qualifier == "product"):
         return CDS.qualifiers["product"][0]
+
+    elif (qualifier == "gene"):
+        if ("gene" in CDS.qualifiers.keys()):
+            return CDS.qualifiers["gene"][0]
+        else:
+            return None
+
+    elif (qualifier == "gene_synonym"):
+        if ("gene_synonym" in CDS.qualifiers.keys()):
+            return CDS.qualifiers["gene_synonym"]
+        else:
+            return None
+
+    elif (qualifier == "locus_tag"):
+        return CDS.qualifiers["locus_tag"][0]
+
+    elif (qualifier == "EC_number"):
+        if ("EC_number" in CDS.qualifiers.keys()):
+            return CDS.qualifiers["EC_number"]
+        else:
+            return None
+
     elif (qualifier == "protein_id"):
-        return CDS.qualifiers["protein_id"][0]
+        if ("protein_id" in CDS.qualifiers.keys()):
+            return CDS.qualifiers["protein_id"][0]
+        else:
+            return None
+
+    elif (qualifier == "function"):
+        if ("function" in CDS.qualifiers.keys()):
+            return CDS.qualifiers["function"][0].split(";")
+        else:
+            return None
+
+    elif (qualifier == "note"):
+        if ("note" in CDS.qualifiers.keys()):
+            return CDS.qualifiers["note"][0].split(";")
+        else:
+            return None
+
+    elif (qualifier == "Pfam"):
+        if ("note" in CDS.qualifiers.keys()):
+            for tag in CDS.qualifiers["note"][0].split(";"):
+                if ("Pfam" in tag):
+                    return tag
+        else:
+            return None
+
+    elif (qualifier == "UniProt"):
+        for ref in CDS.qualifiers["db_xref"]:
+            if ("UniProt" in ref):
+                return ref.split(":")[1].split(":")
+        return None
+
+    elif (qualifier == "GI"):
+        for ref in CDS.qualifiers["db_xref"]:
+            if ("GI" in ref):
+                return int(ref.split(":")[1])
+        return None
+
     elif (qualifier == "translation"):
         return CDS.qualifiers["translation"][0]
+
     else:
         print ("valid qualifiers: codon_start,locus_tag, product, protein_id, translation")
         exit(1)
@@ -62,14 +140,14 @@ def get_strand(CDS):
     return strand
 
 
-# list_recs = list(SeqIO.parse("abcd.gbff","genbank"))
-# genome = list_recs[0]
+# genome = list(SeqIO.parse("ecoli.gbff","genbank"))
+# locus = genome[0]
 
-# source = genome.features[0]
-# CDS = genome.features[2]
-#
-# print (is_WGS(genome))
-# print (get_species_name(genome))
+# source = locus.features[0]
+# CDS = locus.features[11]
+
+# print (is_WGS(locus))
+# print (get_species_name(locus))
 #
 # print (get_subspecies(source))
 # print (get_strain(source))
@@ -82,4 +160,5 @@ def get_strand(CDS):
 # print (get_qualifier(CDS,"codon_start"))
 # print (get_qualifier(CDS,"product"))
 # print (get_qualifier(CDS,"protein_id"))
+# print (CDS)
 # print (get_qualifier(CDS,"translation"))
