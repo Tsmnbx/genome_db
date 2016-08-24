@@ -1,7 +1,7 @@
 from Bio import SeqIO
 from parse_features import *
 
-file_name = "ecoli.gbff"
+file_name = "../../GCA_001686325.1_ER_SAN_1.0_genomic.gbff"
 
 genome = list(SeqIO.parse(file_name,"genbank"))
 first_locus = genome[0]
@@ -11,6 +11,8 @@ if is_WGS(first_locus):
 else:
     num_of_locus = 1
 
+num_of_locus = 1
+
 for locus_id in range(0, num_of_locus):
     # looping through all locus
     locus = genome[locus_id]
@@ -19,9 +21,9 @@ for locus_id in range(0, num_of_locus):
     # source
     source = locus.features[0]
     # applying all functions related to getting info from source
-    # get_species_name(source)
+    print(get_species_name(source))
     # get_subspecies(source)
-    # get_strain(source)
+    print(get_strain(source))
     # get_sub_strain(source)
     # get_taxon(source)
 

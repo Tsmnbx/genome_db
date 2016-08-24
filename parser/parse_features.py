@@ -21,10 +21,6 @@ def get_species_name(source):
     name = genus + "_" + species
     return name
 
-def get_species_name(source):
-    subspecies = source.qualifiers["sub_species"][0]
-    return subspecies
-
 def get_subspecies(source):
     if ("sub_species" in source.qualifiers.keys()):
         subspecies = source.qualifiers["sub_species"][0]
