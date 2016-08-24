@@ -7,7 +7,10 @@ accessions = accession_file.readlines()
 
 outfile = open('ODB_Accession.txt','w')
 
-for num in ids:
+print(len(ids))
+ids_set = set(ids)
+print(len(ids_set))
+for num in ids_set:
   #found = False
   for line in accessions:
     
@@ -20,4 +23,4 @@ for num in ids:
        
 species_file.close()
 accession_file.close()
-   
+outfile.close()   
