@@ -24,6 +24,7 @@ with open("odb3.tsv",'r') as file:
         operon_annotations = get_operon_annotation(operon)
 
         ### id returns the operon key for the table
+        ### attributes that can return null: operon_subspecies, operon_annotations
         print (id)
         print (operon)
         print (operon_koid)
